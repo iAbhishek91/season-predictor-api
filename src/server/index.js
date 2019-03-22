@@ -1,7 +1,6 @@
-import express from 'express';
 import config from 'config';
+import app from '../app';
 
-const app = express();
 const port = config.get('port');
 
 app.listen(port, () => {
