@@ -7,7 +7,8 @@
   "author": "Abhishek Das <abhi.das2007das@gmail.com>",
   "license": "UNLICENSED",
   "scripts": {
-    "build": "babel src --out-dir dist"
+    "build": "babel src --out-dir dist",
+    "test:lint": "eslint src/**"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -17,6 +18,9 @@
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.4.0",
-    "@babel/preset-env": "^7.4.2"
+    "@babel/preset-env": "^7.4.2",
+    "eslint": "^5.15.3",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
   }
 }
