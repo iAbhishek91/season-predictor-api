@@ -1,0 +1,9 @@
+{
+  "name": "season-predictor-api",
+  "version": "1.0.0",
+  "description": "service to detect season based on geo position",
+  "main": "index.js",
+  "repository": "git@github.com:iAbhishek91/season-predictor-api.git",
+  "author": "Abhishek Das <abhishek.das1@lloydsbanking.com>",
+  "license": "UNLICENSED"
+}
