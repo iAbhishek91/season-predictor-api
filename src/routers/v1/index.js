@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import documentRouter from './documentation';
+import documentRoute from './documentation';
 
 const v1RouteEntry = Router();
 
-v1RouteEntry.use('/docs', documentRouter);
+v1RouteEntry.use('/docs', documentRoute);
 
 export default v1RouteEntry;
