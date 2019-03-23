@@ -8,7 +8,7 @@ const docRouter = Router();
 docRouter.use(
   '/',
   swaggerUi.serve,
-  swaggerUi.setup(yamljs.load(path.join(__dirname, '../../../', 'swagger.yml'))),
+  swaggerUi.setup(yamljs.load(path.join(__dirname, '../../../', 'docs', 'api', 'v1', 'swagger.yml'))),
 );
 
 export default docRouter;
