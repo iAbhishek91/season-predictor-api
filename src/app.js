@@ -1,4 +1,5 @@
 import express from 'express';
+import router from './routers/v1/documentation';
 import logger from './middleware/logger';
 
 const app = express();
@@ -11,5 +12,7 @@ app.get('/', (_, req) => {
     message: 'home page',
   });
 });
+
+app.use('/docs', router);
 
 export default app;
