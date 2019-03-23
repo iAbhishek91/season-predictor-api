@@ -2,19 +2,19 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import routeEntry from './routers';
 import logger from './middleware/logger';
+import errorHandler from './middleware/errorHandler';
 
 const app = express();
+const validRoutes = {
+  apiURI: '/api',
+};
 
 app.use(logger);
+
 app.use(bodyParser.json());
 
-app.get('/', (_, req) => {
-  req.status(200);
-  req.json({
-    message: 'home page',
-  });
-});
+app.use(validRoutes.apiURI, routeEntry);
 
-app.use('/api', routeEntry);
+app.use(errorHandler(validRoutes));
 
 export default app;
