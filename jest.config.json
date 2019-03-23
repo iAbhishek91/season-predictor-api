@@ -1,0 +1,18 @@
+{
+  "testMatch": ["<rootDir>/src/*.js"],
+  "collectCoverageFrom": ["<rootDir>/src/*.js"],
+  "coverageDirectory": "coverage",
+  "reporters": [
+    "default",
+    [
+      "./node_modules/jest-html-reporter",
+      {
+        "pageTitle": "season unit-test result",
+        "outputPath": "<rootDir>/unitTestResult.html",
+        "includeFailureMsg": true,
+        "includeConsoleLog": true,
+        "dateFormat": "dd-mmm-yy HH:MM:ss"
+      }
+    ]
+  ]
+}

@@ -7,7 +7,9 @@
   "author": "Abhishek Das <abhi.das2007das@gmail.com>",
   "license": "UNLICENSED",
   "scripts": {
+    "test:unit": "jest --coverage",
     "test:lint": "eslint src/**",
+    "test": "npm run test:unit && npm run test:lint",
     "build": "rm -rf dist && babel src --out-dir dist",
     "start": "npm run build && node dist/server/index.js",
     "start:docker": "docker run -i --rm --init -p 1212:1212 --name my-container1 season-service index.js"
@@ -26,6 +28,7 @@
     "@babel/preset-env": "^7.4.2",
     "eslint": "^5.15.3",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0"
+    "eslint-plugin-import": "^2.14.0",
+    "jest": "^24.5.0"
   }
 }
