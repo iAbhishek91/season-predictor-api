@@ -1,12 +1,12 @@
-# season-predictor-api
+# Season Predictor Api
 
 service to detect season based on geo position
 
-## dependencies
+## Dependencies
 
 this microservice is a depends on **temperature-service-api**
 
-## quick start
+## Quick start
 
 * install *node* and *yarn*. Install yarn using below command.
 
@@ -34,7 +34,7 @@ yarn start
 
 > this application is also **containerized**, can be executed using Docker. Just build the Dockerfile and run the image file.
 
-## test
+## Test
 
 * this microservice has 100% unit test coverage.
 * also lint test are integrated.
