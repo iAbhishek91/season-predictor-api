@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import documentRouter from './routers/v1/documentation';
+import routerEntry from './routers';
 import logger from './middleware/logger';
 
 const app = express();
@@ -15,6 +15,6 @@ app.get('/', (_, req) => {
   });
 });
 
-app.use('/v1/docs', documentRouter);
+app.use('/api', routerEntry);
 
 export default app;
