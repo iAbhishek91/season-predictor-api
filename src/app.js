@@ -1,5 +1,5 @@
 import express from 'express';
-import router from './routers/v1/documentation';
+import documentRouter from './routers/v1/documentation';
 import logger from './middleware/logger';
 
 const app = express();
@@ -13,6 +13,6 @@ app.get('/', (_, req) => {
   });
 });
 
-app.use('/docs', router);
+app.use('/v1/docs', documentRouter);
 
 export default app;
