@@ -15,10 +15,12 @@
     "start:docker": "docker run -i --rm --init -p 1212:1212 --name my-container1 season-service index.js"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "config": "^3.0.1",
     "express": "^4.16.4",
     "morgan": "^1.9.1",
+    "ramda": "^0.26.1",
     "swagger-ui-express": "^4.0.2",
     "yamljs": "^0.3.0"
   },

@@ -1,4 +1,4 @@
-# Season Predictor Api
+:cloud: # Season Predictor Api
 
 service to detect season based on geo position
 
