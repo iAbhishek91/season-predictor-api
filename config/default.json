@@ -1,4 +1,4 @@
 {
-  "port": 1212,
-  "temperatureUrl": "http://localhost:1313/"
+  "port": 2424,
+  "temperatureUrl": "http://localhost:7070/"
 }
