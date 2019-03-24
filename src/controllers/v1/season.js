@@ -49,12 +49,9 @@ export const seasonHelper = async (longitude, latitude) => {
       );
 
       if (temperature && humidity) season = determineSeason(temperature, humidity);
-      if (season) {
-        response.status = 200;
-        response.json = season;
-      } else {
-        throw new Error('Not able to determine season');
-      }
+
+      response.status = 200;
+      response.json = season;
     } catch (e) {
       response.status = e.status || 500;
       response.json = e;
@@ -62,8 +59,7 @@ export const seasonHelper = async (longitude, latitude) => {
   } else {
     response.status = 400;
     response.json = {
-      error: `Invalid headers: longitude or latitude value.
-        Valid values of "LONGITUDE" should be between -180 to 180 and "LATITUDE" should be between -90 and 90`,
+      error: 'Invalid headers: longitude or latitude value. Valid values of LONGITUDE should be between -180 to 180 and LATITUDE should be between -90 and 90',
     };
   }
 

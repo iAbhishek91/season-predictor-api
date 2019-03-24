@@ -6,6 +6,19 @@ import {
 } from './season';
 import { seasonDefinition } from '../../constants';
 
+const seasonHelperValidResponse = {
+  status: 200,
+  json: {
+    season: seasonDefinition[0][0],
+  },
+};
+const seasonHelperInvalidResponse = {
+  status: 400,
+  json: {
+    error: 'Invalid headers: longitude or latitude value. Valid values of LONGITUDE should be between -180 to 180 and LATITUDE should be between -90 and 90',
+  },
+};
+
 describe('season', () => {
   describe('validateLongitude', () => {
     [{
@@ -166,9 +179,24 @@ describe('season', () => {
   });
 
   describe('seasonHelper', () => {
-    it('', () => {
-      const response = seasonHelper('100', '20');
-      console.log(response);
+    it('validate valid response is returned when valid longitude and latitude is passed', async () => {
+      const response = await seasonHelper('100', '20');
+      expect(response).toEqual(seasonHelperValidResponse);
+    });
+
+    it('validate invalid response is returned when invalid longitude and valid latitude is passed', async () => {
+      const response = await seasonHelper('190', '20');
+      expect(response).toEqual(seasonHelperInvalidResponse);
+    });
+
+    it('validate invalid response is returned when valid longitude and invalid latitude is passed', async () => {
+      const response = await seasonHelper('10', '99');
+      expect(response).toEqual(seasonHelperInvalidResponse);
+    });
+
+    it('validate invalid response is returned when both longitude and latitude are invalid', async () => {
+      const response = await seasonHelper('200', '99');
+      expect(response).toEqual(seasonHelperInvalidResponse);
     });
   });
 });
