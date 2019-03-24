@@ -1,4 +1,4 @@
-:cloud: # Season Predictor Api
+# Season Predictor Api
 
 service to detect season based on geo position
 
@@ -47,8 +47,14 @@ yarn test
 
 refer API documentation: `<hosted-domain>/api/v1/docs`
 
+## Season algorithm
+
+Based on temperature and humidity, season is determined based on the below ficticious algorithm:
+
+* termperature between 0 and 45 degree centigrade and humidity < 50 % - AUTUMN
+* termperature between 10 and 45 degree centigrade and humidity > 50 % - SPRING
+
 ## TODO
 
-* version managment
 * changelog and history
 * contribution guide
