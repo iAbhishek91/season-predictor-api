@@ -1,7 +1,7 @@
 module.exports = {
   coverageDirectory: 'coverage',
-  testPathIgnorePatterns: ['node_modules', 'dist', 'src/mock'],
-  coveragePathIgnorePatterns: ['node_modules', 'dist', 'src/mock'],
+  testPathIgnorePatterns: ['node_modules', 'dist', 'src/mockServer', '__mocks__', 'docs', 'test'],
+  coveragePathIgnorePatterns: ['node_modules', 'dist', 'src/mockServer', '__mocks__', 'docs', 'test'],
   reporters: [
     'default',
     [

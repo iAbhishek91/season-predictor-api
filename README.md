@@ -7,6 +7,7 @@ service to detect season based on geo position
 * [Quick start](#Quick-start)
 * [Application environment](#Application-environment)
 * [Test](#Test)
+* [Integration test](#Integration-test)
 * [Dependencies](#Dependencies)
 * [API documentation](#API-documentation)
 * [Season algorithm](#Season-algorithm)
@@ -72,6 +73,12 @@ yarn start:production
 ```sh
 yarn test
 ```
+
+## Integration test
+
+>Note integration test runs on production version of the app because dev environment runs on Mock.
+
+* all out integration tests are save in `./test` folder.
 
 ## Dependencies
 

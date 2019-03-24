@@ -1,0 +1,5 @@
+node_modules
+__mock__
+coverage
+dist
+docs
