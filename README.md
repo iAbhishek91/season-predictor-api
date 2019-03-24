@@ -2,6 +2,15 @@
 
 service to detect season based on geo position
 
+## Table of Contents
+
+* [Quick start](#Quick-start)
+* [Application environment](#Application-environment)
+* [Test](#Test)
+* [Dependencies](#Dependencies)
+* [API documentation](#API-documentation)
+* [Season algorithm](#Season-algorithm)
+
 ## Quick start
 
 * install *node* and *yarn*. Install yarn using below command.
@@ -33,7 +42,7 @@ yarn start
 >   * step-2: [optional] verify the image file is created: `docker images`
 >   * step-3: run the image to form the container: `docker run -i --rm --init -p 1212:1212 --name season-container season-service index.js`
 
-## application environment
+## Application environment
 
 we have two mode of this application: dev and production.
 
@@ -66,7 +75,7 @@ yarn test
 
 ## Dependencies
 
-this microservice is a integrates with **temperature-service-api**
+this service integrates with **temperature-service-api**
 
 ## API documentation
 
@@ -80,8 +89,3 @@ Based on temperature and humidity, season is determined based on the below ficti
 * termperature between 46 and 100 degree centigrade and humidity >= 50 % - SUMMER
 * termperature between 0 and 45 degree centigrade and humidity > 50 % - AUTUMN
 * termperature between 46 and 100 degree centigrade and humidity <= 50 % - SPRING
-
-## TODO
-
-* changelog and history
-* contribution guide
