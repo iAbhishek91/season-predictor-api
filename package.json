@@ -14,7 +14,8 @@
     "start:server": "node dist/server/index.js",
     "start": "npm run build && run-p start:mock start:server",
     "start:mock": "node dist/mock/mockServer.js",
-    "start:docker": "docker run -i --rm --init -p 1212:1212 --name my-container1 season-service index.js"
+    "start:docker": "docker run -i --rm --init -p 1212:1212 --name my-container1 season-service index.js",
+    "start:production": "NODE_ENV=production run-s build start:server"
   },
   "dependencies": {
     "axios": "^0.18.0",
