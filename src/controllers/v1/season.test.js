@@ -2,6 +2,7 @@ import {
   validateLongitude,
   validateLatitude,
   determineSeason,
+  seasonHelper,
 } from './season';
 import { seasonDefinition } from '../../constants';
 
@@ -161,6 +162,13 @@ describe('season', () => {
 
     test('validate highest boundary of temperature and humidity should return SPRING', () => {
       expect(determineSeason(100, 50).season).toEqual(seasonDefinition[3][0]);
+    });
+  });
+
+  describe('seasonHelper', () => {
+    it('', () => {
+      const response = seasonHelper('100', '20');
+      console.log(response);
     });
   });
 });

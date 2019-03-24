@@ -53,9 +53,7 @@ export const seasonHelper = async (longitude, latitude) => {
         response.status = 200;
         response.json = season;
       } else {
-        const e = new Error('Not able to determine season');
-        e.status = 500;
-        throw e;
+        throw new Error('Not able to determine season');
       }
     } catch (e) {
       response.status = e.status || 500;
