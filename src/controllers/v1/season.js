@@ -4,6 +4,8 @@ import request from '../../util/request';
 
 const seasonMap = new Map(seasonDefinition);
 
+export const validateLongitude = longitude => Number(longitude) <= 180 && Number(longitude) >= -180;
+export const validateLatitude = latitude => Number(latitude) <= 90 && Number(latitude) >= -90;
 export const determineSeason = (temperature, humidity) => {
   let season;
 
@@ -22,21 +24,45 @@ export const determineSeason = (temperature, humidity) => {
 
 export const seasonHelper = async (longitude, latitude) => {
   const temperatureRequest = request(config.temperatureUrl);
+  const response = {};
   let season;
 
-  try {
-    const { temperature, humidity } = await temperatureRequest(
-      '/api/v1/weather',
-      'GET',
-      { longitude, latitude },
-    );
+  if (
+    longitude && latitude
+    && Number(longitude) === 0
+    && Number(latitude) === 0
+    && validateLongitude(longitude)
+    && validateLatitude(latitude)
+  ) {
+    try {
+      const { temperature, humidity } = await temperatureRequest(
+        '/api/v1/weather',
+        'GET',
+        { longitude, latitude },
+      );
 
-    if (temperature && humidity) season = determineSeason(temperature, humidity);
-
-    return { status: 200, json: season };
-  } catch (e) {
-    return { status: e.status || 500, json: e };
+      if (temperature && humidity) season = determineSeason(temperature, humidity);
+      if (season) {
+        response.status = 200;
+        response.json = season;
+      } else {
+        const e = new Error('Not able to determine season');
+        e.status = 500;
+        throw e;
+      }
+    } catch (e) {
+      response.status = e.status || 500;
+      response.json = e;
+    }
+  } else {
+    response.status = 400;
+    response.json = {
+      error: `Invalid headers: longitude or latitude value.
+        Valid values of "LONGITUDE" should be between -180 to 180 and "LATITUDE" should be between -90 and 90`,
+    };
   }
+
+  return response;
 };
 
 export default async (req, res) => {
