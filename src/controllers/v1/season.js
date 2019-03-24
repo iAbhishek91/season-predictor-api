@@ -4,8 +4,18 @@ import request from '../../util/request';
 
 const seasonMap = new Map(seasonDefinition);
 
-export const validateLongitude = longitude => Number(longitude) <= 180 && Number(longitude) >= -180;
-export const validateLatitude = latitude => Number(latitude) <= 90 && Number(latitude) >= -90;
+export const validateLongitude = longitude => (
+  longitude
+    ? (Number(longitude) <= 180 && Number(longitude) >= -180)
+    : false
+);
+
+export const validateLatitude = latitude => (
+  latitude
+    ? (Number(latitude) <= 90 && Number(latitude) >= -90)
+    : false
+);
+
 export const determineSeason = (temperature, humidity) => {
   let season;
 
@@ -28,10 +38,7 @@ export const seasonHelper = async (longitude, latitude) => {
   let season;
 
   if (
-    longitude && latitude
-    && Number(longitude) === 0
-    && Number(latitude) === 0
-    && validateLongitude(longitude)
+    validateLongitude(longitude)
     && validateLatitude(latitude)
   ) {
     try {
