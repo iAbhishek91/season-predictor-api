@@ -1,1 +1,1 @@
-export default validRoutes => (_, res) => res.status(301).json(validRoutes);
+export default validRoutes => (_, res) => res.status(404).json(validRoutes);
