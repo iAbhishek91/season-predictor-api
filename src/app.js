@@ -5,7 +5,7 @@ import logger from './middleware/logger';
 import errorHandler from './middleware/errorHandler';
 
 const app = express();
-const validRoutes = {
+export const validRoutes = {
   apiURI: '/api',
 };
 

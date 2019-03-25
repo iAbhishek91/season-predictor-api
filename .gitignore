@@ -3,3 +3,4 @@ dist
 app.log
 coverage
 unitTestResult.html
+integrationTestResult.html

@@ -1,4 +1,5 @@
 import config from 'config';
+import { validRoutes as appValidRoutes } from '../../src/app';
 import {
   requestGet,
   requestPost,
@@ -53,10 +54,19 @@ describe('season-predictor-api', () => {
   });
 
   describe('invalid end-points', () => {
-    test('GET /api/v1/seaso/ validate wrong end points', async () => {
-      const { body } = await requestGet(baseUrl, 'api/v1/season', header(100, 50));
+    test('GET /abcdef/ validate wrong end points returns "HTTP: 404" as status', async () => {
+      const { status } = await requestGet(baseUrl, 'abcdef', header(100, 50));
 
-      expect(body).toEqual({ season: seasonDefinition[0][0] });
+      expect(status).toEqual(400);
     });
+
+    test('GET /abcdef/ validate wrong end points returns valid URI guide as body', async () => {
+      const { body } = await requestGet(baseUrl, 'abcdef', header(100, 50));
+
+      expect(body).toEqual(JSON.stringify(appValidRoutes));
+    });
+
+    test('GET /api/v1/seaso/ validate wrong end points returns "HTTP: 404"');
+    test('GET /api/v1/seaso/ validate wrong end points returns "HTTP: 404"');
   });
 });

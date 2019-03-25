@@ -1,6 +1,6 @@
 module.exports = {
+  testMatch: ['<rootDir>/src/**/*.test.js'],
   coverageDirectory: 'coverage',
-  testPathIgnorePatterns: ['node_modules', 'dist', 'src/mockServer', '__mocks__', 'docs', 'test'],
   coveragePathIgnorePatterns: ['node_modules', 'dist', 'src/mockServer', '__mocks__', 'docs', 'test'],
   reporters: [
     'default',
