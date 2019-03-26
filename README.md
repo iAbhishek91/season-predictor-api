@@ -1,8 +1,8 @@
-# Season Predictor Api
+# Season Predictor API
 
 service to detect season based on geo position
 
-## Table of Contents
+## Table of contents
 
 * [Dependencies](#Dependencies)
 * [Quick start](#Quick-start)
@@ -46,19 +46,17 @@ yarn
 yarn start
 ```
 
-> * best way to run this application is in docker. Note the Docker file runs the application in production mode.
->   * step-1: build the docker image: `docker build -t season-service .`
->   * step-2: [optional] verify the image file is created: `docker images`
->   * step-3: run the image to form the container: `docker run -i --rm --init -p 1212:1212 --name season-container season-service index.js`
+> * best way to run this application is in docker. Note the Docker file runs the application in test mode. more detail below.
 
 ## Application environment
 
-we have two mode of this application: dev and production.
+we have two mode of this application: *dev* and *test*.
 
 * **dev mode:**
-  * run with mocks, with out actual integration
+  * run with [mocks](#Mocks), without actual integration
   * development and unit testing should be performed on this env.
   * execute the below command for starting the app in dev mode.
+  * post used: 2424
 
 ```sh
 yarn start
@@ -68,12 +66,13 @@ yarn start
   * runs with actual integration with other services.
   * end to end test can be performed in this mode.
   * execute the below command for starting the app in dev mode.
+  * port used: 1212
 
 ```sh
 yarn start:test
 ```
 
-* using docker
+alternatively, using docker
 
 ```sh
 # from the root folder of season-predictor-api
@@ -123,9 +122,18 @@ refer API documentation: `<hosted-domain>/api/v1/docs`
 
 ## Season algorithm
 
-Based on temperature and humidity, season is determined based on the below ficticious algorithm:
+based on temperature and humidity, season is determined based on the below ficticious algorithm:
 
 * termperature between 0 and 45 degree centigrade and humidity < 50 % - WINTER
 * termperature between 46 and 100 degree centigrade and humidity >= 50 % - SUMMER
 * termperature between 0 and 45 degree centigrade and humidity > 50 % - AUTUMN
 * termperature between 46 and 100 degree centigrade and humidity <= 50 % - SPRING
+
+## Mocks
+
+in this app we use different types of mock to facilitate development and unit testing.
+
+* **module mocks:** axios module is mocked on global level for unit testing.
+* **service mocks:** we have custom mock server built-in which stubs `temperature-service-api`. Hence we can easily develop in isolation.
+
+>NOTE: mocks only works in *development* environment.
