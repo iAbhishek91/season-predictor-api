@@ -15,11 +15,15 @@ const seasonHelperValidResponse = {
 const seasonHelperInvalidResponse = {
   status: 400,
   json: {
-    error: 'Invalid headers: longitude or latitude value. Valid values of LONGITUDE should be between -180 to 180 and LATITUDE should be between -90 and 90',
+    status: 400,
+    message: 'Bad request, probably invalid headers',
+    details: 'longitude or latitude value. Valid values of LONGITUDE should be between -180 to 180 and LATITUDE should be between -90 and 90',
   },
 };
 
+
 describe('season', () => {
+  beforeEach(() => jest.resetModules());
   describe('validateLongitude', () => {
     [{
       testName: 'string should return "false"',
@@ -66,7 +70,7 @@ describe('season', () => {
       longitude: 150,
       expected: true,
     }].forEach((testCase) => {
-      test(`validate ${testCase.testName}`, () => {
+      it(`validate ${testCase.testName}`, () => {
         expect(
           validateLongitude(testCase.longitude),
         ).toBe(testCase.expected);
@@ -120,7 +124,7 @@ describe('season', () => {
       latitude: 30,
       expected: true,
     }].forEach((testCase) => {
-      test(`validate ${testCase.testName}`, () => {
+      it(`validate ${testCase.testName}`, () => {
         expect(
           validateLatitude(testCase.latitude),
         ).toBe(testCase.expected);
@@ -129,51 +133,51 @@ describe('season', () => {
   });
 
   describe('determineSeason', () => {
-    test('validate lowest boundary of temperature and humidity should return WINTER', () => {
+    it('validate lowest boundary of temperature and humidity should return WINTER', () => {
       expect(determineSeason(0, 0).season).toEqual(seasonDefinition[0][0]);
     });
 
-    test('validate when temperature and humidity is in valid range then should return WINTER', () => {
+    it('validate when temperature and humidity is in valid range then should return WINTER', () => {
       expect(determineSeason(30, 30).season).toEqual(seasonDefinition[0][0]);
     });
 
-    test('validate highest boundary of temperature and humidity should return WINTER', () => {
+    it('validate highest boundary of temperature and humidity should return WINTER', () => {
       expect(determineSeason(45, 50).season).toEqual(seasonDefinition[0][0]);
     });
 
-    test('validate lowest boundary of temperature and humidity should return SUMMER', () => {
+    it('validate lowest boundary of temperature and humidity should return SUMMER', () => {
       expect(determineSeason(46, 51).season).toEqual(seasonDefinition[1][0]);
     });
 
-    test('validate when temperature and humidity is in valid range then should return SUMMER', () => {
+    it('validate when temperature and humidity is in valid range then should return SUMMER', () => {
       expect(determineSeason(75, 75).season).toEqual(seasonDefinition[1][0]);
     });
 
-    test('validate highest boundary of temperature and humidity should return SUMMER', () => {
+    it('validate highest boundary of temperature and humidity should return SUMMER', () => {
       expect(determineSeason(100, 100).season).toEqual(seasonDefinition[1][0]);
     });
 
-    test('validate lowest boundary of temperature and humidity should return AUTUMN', () => {
+    it('validate lowest boundary of temperature and humidity should return AUTUMN', () => {
       expect(determineSeason(0, 51).season).toEqual(seasonDefinition[2][0]);
     });
 
-    test('validate when temperature and humidity is in valid range then should return AUTUMN', () => {
+    it('validate when temperature and humidity is in valid range then should return AUTUMN', () => {
       expect(determineSeason(30, 75).season).toEqual(seasonDefinition[2][0]);
     });
 
-    test('validate highest boundary of temperature and humidity should return AUTUMN', () => {
+    it('validate highest boundary of temperature and humidity should return AUTUMN', () => {
       expect(determineSeason(45, 100).season).toEqual(seasonDefinition[2][0]);
     });
 
-    test('validate lowest boundary of temperature and humidity should return SPRING', () => {
+    it('validate lowest boundary of temperature and humidity should return SPRING', () => {
       expect(determineSeason(46, 0).season).toEqual(seasonDefinition[3][0]);
     });
 
-    test('validate when temperature and humidity is in valid range then should return SPRING', () => {
+    it('validate when temperature and humidity is in valid range then should return SPRING', () => {
       expect(determineSeason(75, 25).season).toEqual(seasonDefinition[3][0]);
     });
 
-    test('validate highest boundary of temperature and humidity should return SPRING', () => {
+    it('validate highest boundary of temperature and humidity should return SPRING', () => {
       expect(determineSeason(100, 50).season).toEqual(seasonDefinition[3][0]);
     });
   });
@@ -186,17 +190,30 @@ describe('season', () => {
 
     it('validate invalid response is returned when invalid longitude and valid latitude is passed', async () => {
       const response = await seasonHelper('190', '20');
-      expect(response).toEqual(seasonHelperInvalidResponse);
+      expect(response.json.message).toEqual(seasonHelperInvalidResponse.json.message);
+      expect(response.json.details).toEqual(seasonHelperInvalidResponse.json.details);
     });
 
     it('validate invalid response is returned when valid longitude and invalid latitude is passed', async () => {
       const response = await seasonHelper('10', '99');
-      expect(response).toEqual(seasonHelperInvalidResponse);
+      expect(response.json.message).toEqual(seasonHelperInvalidResponse.json.message);
+      expect(response.json.details).toEqual(seasonHelperInvalidResponse.json.details);
     });
 
     it('validate invalid response is returned when both longitude and latitude are invalid', async () => {
       const response = await seasonHelper('200', '99');
-      expect(response).toEqual(seasonHelperInvalidResponse);
+      expect(response.json.message).toEqual(seasonHelperInvalidResponse.json.message);
+      expect(response.json.details).toEqual(seasonHelperInvalidResponse.json.details);
+    });
+
+    it('validate catch block is executed when "temperatureRequest" return promise rejection', async () => {
+      jest.doMock('../../util/request', () => () => () => Promise.reject());
+
+      const { seasonHelper: s } = require('./season'); // eslint-disable-line global-require
+      const response = await s('180', '90');
+
+      expect(response.json.message).toEqual('Internal server error');
+      expect(response.json.details).toEqual('Exception thrown while determining season.');
     });
   });
 });

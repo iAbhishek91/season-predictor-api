@@ -11,7 +11,7 @@ RUN yarn
 
 COPY . ./
 
-RUN yarn build:production
+RUN yarn build:test
 
 ENTRYPOINT [ "node", "dist/server/" ]
 

@@ -1,4 +1,5 @@
 {
+  "port": 1212,
   "temperatureUrl": "http://localhost:1313/",
   "seasonUrl": "http://localhost:1212/"
 }

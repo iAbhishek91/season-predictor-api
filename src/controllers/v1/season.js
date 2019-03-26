@@ -1,6 +1,7 @@
 import config from 'config';
 import { seasonDefinition } from '../../constants';
 import request from '../../util/request';
+import AIPError from '../../util/APIError';
 
 const seasonMap = new Map(seasonDefinition);
 
@@ -53,14 +54,22 @@ export const seasonHelper = async (longitude, latitude) => {
       response.status = 200;
       response.json = season;
     } catch (e) {
-      response.status = e.status || 500;
-      response.json = e;
+      const aipError = new AIPError(
+        500,
+        'Internal server error',
+        'Exception thrown while determining season.',
+      );
+      response.status = aipError.status;
+      response.json = aipError;
     }
   } else {
-    response.status = 400;
-    response.json = {
-      error: 'Invalid headers: longitude or latitude value. Valid values of LONGITUDE should be between -180 to 180 and LATITUDE should be between -90 and 90',
-    };
+    const aipError = new AIPError(
+      400,
+      'Bad request, probably invalid headers',
+      'longitude or latitude value. Valid values of LONGITUDE should be between -180 to 180 and LATITUDE should be between -90 and 90',
+    );
+    response.status = aipError.status;
+    response.json = aipError;
   }
 
   return response;

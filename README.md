@@ -56,13 +56,13 @@ we have two mode of this application: dev and production.
 yarn start
 ```
 
-* **production mode**
+* **test mode**
   * runs with actual integration with other services.
   * end to end test can be performed in this mode.
   * execute the below command for starting the app in dev mode.
 
 ```sh
-yarn start:production
+yarn start:test
 ```
 
 ## Test
