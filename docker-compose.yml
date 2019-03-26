@@ -1,0 +1,21 @@
+version: '3'
+services:
+  temperature-api:
+    image: temperature-service
+    container_name: temperature-container
+    ports:
+      - "1313:1313"
+    command:
+      - node
+      - index.js
+  season-api:
+    image: season-service
+    container_name: season-container
+    ports: 
+      - "1212:1212"
+    environment:
+      - TEMP_URL=http://temperature-container:1313
+      - NODE_ENV=test
+    command:
+      - node
+      - index.js

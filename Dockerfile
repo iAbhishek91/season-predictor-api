@@ -9,9 +9,9 @@ COPY package.json yarn.lock ./
 
 RUN yarn
 
-COPY . ./
+COPY . /user/seasonService
 
-RUN yarn build:test
+RUN yarn build
 
 ENTRYPOINT [ "node", "dist/server/" ]
 

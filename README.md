@@ -4,13 +4,21 @@ service to detect season based on geo position
 
 ## Table of Contents
 
+* [Dependencies](#Dependencies)
 * [Quick start](#Quick-start)
 * [Application environment](#Application-environment)
-* [Test](#Test)
+* [Unit test](#Unit-test)
+  * [Unit test reports](#Unit-test-reports)
 * [Integration test](#Integration-test)
-* [Dependencies](#Dependencies)
+  * [Integration test reports](#Integration-test-reports)
 * [API documentation](#API-documentation)
 * [Season algorithm](#Season-algorithm)
+
+## Dependencies
+
+this service integrates with
+
+* [temperature-service-api](https://github.com/iAbhishek91/temperature-service-api)
 
 ## Quick start
 
@@ -65,7 +73,18 @@ yarn start
 yarn start:test
 ```
 
-## Test
+* using docker
+
+```sh
+# from the root folder of season-predictor-api
+docker build -t season-service .
+# from the root folder of temperature-service-api
+docker build -t temperature-service .
+# from the root folder of season-predictor-api
+docker-compose up
+```
+
+## Unit test
 
 * this microservice has 100% unit test coverage.
 * also lint test are integrated.
@@ -74,15 +93,29 @@ yarn start:test
 yarn test
 ```
 
+### Unit test reports
+
+post execution of unit test, following reports are generated.
+
+* **coverage report**: available at `./coverage/Icov-report/index.html`.
+* **unit test report**: avialble at `./unitTestResult.html`
+
 ## Integration test
 
->Note integration test runs on production version of the app because dev environment runs on Mock.
+>NOTE: integration test runs on test mode of the app because dev environment runs on Mock.
+>Pre requisits: start both the service in docker. To start app under test mode under, refer section[Application environment](#Application-environment)
 
-* all out integration tests are save in `./test` folder.
+* all out integration tests are in `./test` folder.
 
-## Dependencies
+```sh
+yarn test:integration
+```
 
-this service integrates with **temperature-service-api**
+### Integration test reports
+
+post execution of integration test, following reports are generated.
+
+* **integration test report**: avialble at `./integrationTestResult.html`
 
 ## API documentation
 
