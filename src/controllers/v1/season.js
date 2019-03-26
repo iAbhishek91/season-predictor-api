@@ -34,7 +34,6 @@ export const determineSeason = (temperature, humidity) => {
 };
 
 export const seasonHelper = async (longitude, latitude) => {
-  console.log(config.temperatureUrl);
   const temperatureRequest = request(config.temperatureUrl);
   const response = {};
   let season;
@@ -49,7 +48,7 @@ export const seasonHelper = async (longitude, latitude) => {
         'GET',
         { longitude, latitude },
       );
-      console.log(`temperature${temperature}, humidity${humidity}`);
+
       if (temperature && humidity) season = determineSeason(temperature, humidity);
 
       response.status = 200;
