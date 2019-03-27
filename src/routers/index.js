@@ -10,7 +10,7 @@ const validRoutes = {
 
 routeEntry.use(validRoutes.v1URI, v1Route);
 
-routeEntry.use(throwAIPError(404, 'Endpoint not found', `valid URI ${JSON.stringify(validRoutes)}`));
+routeEntry.use(throwAIPError(404, 'Endpoint not found', `Endpoint not found. Valid URI ${JSON.stringify(validRoutes)}`));
 
 routeEntry.use(errorHandler);
 

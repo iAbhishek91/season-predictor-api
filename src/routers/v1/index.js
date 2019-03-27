@@ -17,7 +17,7 @@ v1RouteEntry.use(validRoutes.docsURI, documentRoute);
 
 v1RouteEntry.use(validRoutes.season.URI, seasonRoute);
 
-v1RouteEntry.use(throwAIPError(404, 'Endpoint not found', `valid URI ${JSON.stringify(validRoutes)}`));
+v1RouteEntry.use(throwAIPError(404, 'Endpoint not found', `Endpoint not found. Valid URI ${JSON.stringify(validRoutes)}`));
 
 v1RouteEntry.use(errorHandler);
 

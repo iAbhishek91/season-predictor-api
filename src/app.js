@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 
 app.use(validRoutes.apiURI, routeEntry);
 
-app.use(throwAIPError(404, 'Endpoint not found', `valid URI ${JSON.stringify(validRoutes)}`));
+app.use(throwAIPError(404, 'Endpoint not found', `Endpoint not found. Valid URI ${JSON.stringify(validRoutes)}`));
 
 app.use(errorHandler);
 

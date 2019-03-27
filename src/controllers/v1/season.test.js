@@ -17,7 +17,7 @@ const seasonHelperInvalidResponse = {
   json: {
     status: 400,
     message: 'Bad request, probably invalid headers',
-    details: 'longitude or latitude value. Valid values of LONGITUDE should be between -180 to 180 and LATITUDE should be between -90 and 90',
+    details: 'Bad request, probably invalid headers. Longitude or latitude value. Valid values of LONGITUDE should be between -180 to 180 and LATITUDE should be between -90 and 90',
   },
 };
 
@@ -213,7 +213,7 @@ describe('season', () => {
       const response = await s('180', '90');
 
       expect(response.json.message).toEqual('Internal server error');
-      expect(response.json.details).toEqual('Exception thrown while determining season.');
+      expect(response.json.details).toEqual('Internal server error. Exception thrown while determining season.');
     });
   });
 });
