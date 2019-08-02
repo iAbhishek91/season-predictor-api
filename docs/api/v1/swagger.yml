@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   description: "A sample API for determining season based on geo location."
   version: 0.0.1
-  title: "Temperature API"
+  title: "Season Predictor API"
   contact: 
     email: "abhi.das2007das@gmail.com"
 host: 
@@ -56,19 +56,16 @@ definitions:
   Response:
     type: object
     properties:
-      temperature:
-        type: integer
-        description: temperature of the location
-        minimum: 0
-        maximum: 60
-      humidity:
-        type: integer
-        description: humidity of the location
-        minimum: 0
-        maximum: 100
+      season:
+        type: string
+        description: season of the location
+        enum:
+          - AUTUMN
+          - WINTER
+          - SUMMER
+          - SPRING
     required:
-      - temperature
-      - humidity
+      - season
   APIError:
     type: object
     properties:

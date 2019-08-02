@@ -76,12 +76,15 @@ alternatively, using docker
 
 ```sh
 # from the root folder of season-predictor-api
-docker build -t season-service .
+docker build -t abdas81/season-service .
 # from the root folder of temperature-service-api
-docker build -t temperature-service .
+docker build -t abdas81/temperature-service .
 # from the root folder of season-predictor-api
 docker-compose up
 ```
+
+**Note: The images are uploaded in docker hub. Please refer** [docker hub](https://hub.docker.com/u/abdas81)
+Docker compose will automatically pull from globa docker registry.
 
 ## Unit test
 

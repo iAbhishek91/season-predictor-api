@@ -1,15 +1,15 @@
 version: '3'
 services:
   temperature-api:
-    image: temperature-service
-    container_name: abdas81/temperature-container
+    image: abdas81/temperature-service
+    container_name: temperature-container
     ports:
       - "1313:1313"
     command:
       - node
       - index.js
   season-api:
-    image: abdas81/season-service
+    image: abdas81/season-predictor
     container_name: season-container
     ports: 
       - "1212:1212"
