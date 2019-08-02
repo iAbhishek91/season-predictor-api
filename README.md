@@ -76,7 +76,7 @@ alternatively, using docker
 
 ```sh
 # from the root folder of season-predictor-api
-docker build -t abdas81/season-service .
+docker build -t abdas81/season-predictor .
 # from the root folder of temperature-service-api
 docker build -t abdas81/temperature-service .
 # from the root folder of season-predictor-api
