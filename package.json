@@ -19,7 +19,7 @@
     "start:test": "NODE_ENV=test run-s build start:server"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "body-parser": "^1.18.3",
     "config": "^3.0.1",
     "core-js": "^3.0.0",
